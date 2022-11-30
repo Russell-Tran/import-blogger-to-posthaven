@@ -3,7 +3,7 @@ extern crate minidom;
 
 use minidom::Element;
 //use xml::reader::EventReader;
-//use std::fs;
+use std::fs;
 //use std::fs::File;
 
 // const XHTML_NS: &'static str = "http://www.w3.org/1999/xhtml";
@@ -35,8 +35,8 @@ const DATA: &'static str = r#"<DocumentElement param="value" xmlns='http://www.w
 
 fn main() {
 
-
-    let root: minidom::Element = DATA.parse().unwrap();
+    let data = fs::read_to_string("examples/something.xml").expect("Unable to read file");
+    let root: minidom::Element = data.parse().unwrap();
     println!("{:#?}", root);
 
     // let mut f = File::open("examples/something.xml");
