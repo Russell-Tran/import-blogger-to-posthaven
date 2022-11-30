@@ -33,11 +33,20 @@ const DATA: &'static str = r#"<DocumentElement param="value" xmlns='http://www.w
 </SecondElement>
 </DocumentElement>"#;
 
+// const JUNK =: &'static str = "<?xml version='1.0' encoding='utf-8'?><?xml-stylesheet href="https://www.blogger.com/styles/atom.css" type="text/css"?>"
+
 fn main() {
 
-    let data = fs::read_to_string("examples/something.xml").expect("Unable to read file");
-    let root: minidom::Element = data.parse().unwrap();
-    println!("{:#?}", root);
+    let prefix_junk = r#"<?xml version='1.0' encoding='utf-8'?><?xml-stylesheet href="https://www.blogger.com/styles/atom.css" type="text/css"?>"#;
+    let data = fs::read_to_string("/Users/russelltran/Downloads/your_blogger_blog.xml").expect("Unable to read file");
+    
+    // assert that prefix junk exists
+    println!(" {:?}", data.find(prefix_junk));
+    // if prefix junk exists, save data as a slice whose prefix is truncated by the length of prefix_junk
+
+
+    // let root: minidom::Element = data.parse().unwrap();
+    // println!("{:#?}", root);
 
     // let mut f = File::open("examples/something.xml");
     // let parser = xml::reader::EventReader::new(f);
